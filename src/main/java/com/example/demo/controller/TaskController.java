@@ -9,24 +9,23 @@ import com.example.demo.model.Task;
 import com.example.demo.service.ITaskService;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class TaskController {
 
 	@Autowired
 	private ITaskService taskService;
 
-	@CrossOrigin(origins = "*")
+	
 	@GetMapping("/task/todos")
 	public List<Task> getProductos() {
 		return taskService.getTasks();
 	}
 	
-	@CrossOrigin(origins = "*")
 	@PostMapping("/task/crear")
 	public Task createProducto(@RequestBody Task t) {
 		return taskService.saveTask(t);
 	}
 	
-	@CrossOrigin(origins = "*")
 	@DeleteMapping("/task/borrar/{id}")
 	public String deleteProducto(@PathVariable Integer id) {
 		taskService.deleteTask(id);
@@ -34,7 +33,6 @@ public class TaskController {
 	}
 	
 	
-	@CrossOrigin(origins = "*")
 	@PutMapping("/task/editar/{id}")
 	public Task editProducto(@PathVariable Integer id, @RequestBody Task t) {
 		Task newt = taskService.findTask(id);
